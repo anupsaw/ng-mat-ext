@@ -1,0 +1,62 @@
+<form [formGroup]="user">
+    <div class="sz-input-wrapper">
+        <input type='text'
+               formControlName='firstName'
+               placeholder="First Name"
+               ngError
+               minlength="5" />
+        <div>
+            <ng-error type='required'
+                      for="firstName"
+                      message="First Name is required"></ng-error>
+            <ng-error type='minlength'
+                      for="firstName"
+                      message="Please enter min length"></ng-error>
+        </div>
+    </div>
+
+
+    <div class="sz-input-wrapper">
+        <input type='text'
+               formControlName='lastName'
+               placeholder="Last Name"
+               ngError
+               minlength="5" />
+
+        <div *ngIf="lastNameError">
+            <ng-error type='required'
+                      for="lastName"
+                      message="First Name is required"></ng-error>
+            <ng-error type='minlength'
+                      for="lastName"
+                      message="Please enter min length"></ng-error>
+        </div>
+    </div>
+
+
+    <div class="sz-input-wrapper">
+        <input type='text'
+               formControlName='age'
+               placeholder="Age"
+               ngError
+               minlength="5" />
+    </div>
+
+    <div class="sz-input-wrapper">
+        <input type='text'
+               formControlName='city'
+               placeholder="City"
+               ngError
+               minlength="5" />
+
+        <div>
+            <div>
+                <ng-error for="city"></ng-error>
+            </div>
+        </div>
+    </div>
+
+    <button type="button"
+            class="sz-button"
+            (click)="lastNameErrorShow()">Click</button>
+</form>

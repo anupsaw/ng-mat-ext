@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>MatExt</title>
+  <base href="/">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <link rel="icon"
+        type="image/x-icon"
+        href="favicon.ico">
+</head>
+
+<body>
+  <script>
+    var entityMap = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': '&quot;',
+      "'": '&#39;',
+      "/": '&#x2F;'
+    };
+
+    function escapeHtml(string) {
+      return String(string).replace(/[&<>"'\/]/g, function (s) {
+        return entityMap[s];
+      });
+    }
+
+    //document.addEventListener("DOMContentLoaded", init, false);
+
+    window.onload = function init() {
+      var codeblock = document.querySelectorAll("pre code");
+
+      if (codeblock.length) {
+        for (var i = 0, len = codeblock.length; i < len; i++) {
+          var dom = codeblock[i];
+          var html = dom.innerHTML;
+          html = escapeHtml(html);
+          dom.innerHTML = html;
+        }
+      }
+    }
+
+  </script>
+  <app-root></app-root>
+</body>
+
+</html>

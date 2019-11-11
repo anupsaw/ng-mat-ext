@@ -1,0 +1,41 @@
+@import '../../scss/color';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    min-height: 80px;
+    justify-content: center;
+    background-color: map-get($light-theme, regular);
+
+    header {
+        width: 80%;
+        height: 80px;
+        display: flex;
+        margin: 0 auto;
+        font-family: serif;
+        background: transparent;
+        //     box-shadow: 0 1px 4px map-get($light-theme, shade);
+
+        .sz-brand {
+            display: flex;
+            align-items: center;
+
+            h1, h2, h3 {
+
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        h1::first-letter {
+            font-size: 40px;
+        }
+
+        .sz-action-nav {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+
+}
