@@ -56,7 +56,21 @@
         </div>
     </div>
 
+    <input type='text'
+           [formControl]='isolatedFormControl'
+           name='Isolated'
+           placeholder="Isolated FormControl"
+           ngError
+           minlength="5" />
+
+
     <button type="button"
             class="sz-button"
             (click)="lastNameErrorShow()">Click</button>
 </form>
+
+<app-code-block [code]='code'>
+
+
+
+</app-code-block>

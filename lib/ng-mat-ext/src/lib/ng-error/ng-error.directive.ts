@@ -26,7 +26,9 @@ export class NgErrorDirective implements AfterViewInit, OnDestroy {
     private resolver: ComponentFactoryResolver,
     private cd: ChangeDetectorRef,
     @Inject(NG_ERROR_MESSAGE_REGISTRY) public registeredErrorMessages: NgError[]
-  ) { }
+  ) {
+    console.log(this.ngControl);
+   }
 
   public ngAfterViewInit(): void {
     this.includeNgErrorTemplate();

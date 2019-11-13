@@ -4,9 +4,10 @@ import { MatFormFieldModule, MatInputModule, MatIconModule } from '@angular/mate
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgErrorModule } from '@sahaz/ng-mat-ext';
 import { MagicalFieldErrorComponent } from './magical-field-error/magical-field-error.component';
+import { CodeBlockComponent } from '../code-block/code-block.component';
 
 @NgModule({
-  declarations: [MagicalFieldErrorComponent],
+  declarations: [MagicalFieldErrorComponent, CodeBlockComponent],
   imports: [
     CommonModule, MatFormFieldModule, MatInputModule, MatIconModule, ReactiveFormsModule, NgErrorModule
   ],
