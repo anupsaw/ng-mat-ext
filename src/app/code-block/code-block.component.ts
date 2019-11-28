@@ -20,7 +20,7 @@ export class CodeBlockComponent implements OnInit {
   constructor(private ele: ElementRef) { }
 
   ngOnInit() {
-    setTimeout(() => codeHighlighter.highlightBlock($(this.codeBlock.nativeElement)[0]));
+    setTimeout(() => codeHighlighter.highlightBlock((this.codeBlock.nativeElement)));
 
   }
 
