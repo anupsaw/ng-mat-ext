@@ -1,7 +1,7 @@
 import {
   Component, OnInit, Input,
   HostBinding, ViewContainerRef,
-  OnDestroy,ViewEncapsulation
+  OnDestroy, ViewEncapsulation, ElementRef
 } from '@angular/core';
 import { NgError } from './ng-error-message-registry';
 
@@ -29,11 +29,9 @@ export class NgErrorComponent implements OnInit, NgError, OnDestroy {
 
   public ngOnInit() {
     NgErrorComponent.errorContainerRef.set(this.id, this);
-    console.log(NgErrorComponent.errorContainerRef, NgErrorComponent.compCounter);
   }
 
   public ngOnDestroy() {
-    console.log('called');
     NgErrorComponent.errorContainerRef.delete(this.id);
   }
 

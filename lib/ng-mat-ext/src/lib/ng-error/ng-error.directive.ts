@@ -26,9 +26,7 @@ export class NgErrorDirective implements AfterViewInit, OnDestroy {
     private resolver: ComponentFactoryResolver,
     private cd: ChangeDetectorRef,
     @Inject(NG_ERROR_MESSAGE_REGISTRY) public registeredErrorMessages: NgError[]
-  ) {
-    console.log(this.ngControl);
-   }
+  ) { }
 
   public ngAfterViewInit(): void {
     this.includeNgErrorTemplate();
@@ -39,17 +37,6 @@ export class NgErrorDirective implements AfterViewInit, OnDestroy {
   }
 
   public createErrorComponent(comp: NgErrorComponent) {
-    // if (this.errorComp) {
-    //   this.errorComp.errorMessage = msg;
-    // } else {
-    //   if (!this.errorCompRef) {
-    //     const ref = this.resolver.resolveComponentFactory(NgErrorComponent);
-    //     this.errorCompRef = ref.create(this.container.injector);
-    //   }
-    //   this.errorCompRef.instance.errorMessage = msg;
-    //   this.container.insert(this.errorCompRef.hostView);
-    // }
-
     if (!this.errorCompRef) {
       const ref = this.resolver.resolveComponentFactory(NgErrorComponent);
       this.errorCompRef = ref.create(this.container.injector);
@@ -60,7 +47,6 @@ export class NgErrorDirective implements AfterViewInit, OnDestroy {
     } else {
       this.container.insert(this.errorCompRef.hostView);
     }
-
 
   }
 
@@ -74,6 +60,7 @@ export class NgErrorDirective implements AfterViewInit, OnDestroy {
     let firstComp = null;
     errorComp.forEach((item: HTMLElement, index: number) => {
       const comp = NgErrorComponent.errorContainerRef.get(item.id);
+      this.customErrors.push(NgError.create(comp.type, comp.message, comp.priority || 1));
       index === 0 ?
         firstComp = comp
         : comp.destroy();
@@ -97,7 +84,6 @@ export class NgErrorDirective implements AfterViewInit, OnDestroy {
     }
 
     this.updateMessage(error && error.message || '');
-    // this.updateErrorMessage(error);
   }
 
   private updateMessage(msg: string): void {
@@ -105,23 +91,7 @@ export class NgErrorDirective implements AfterViewInit, OnDestroy {
     this.errorCompRef.hostView.detectChanges();
   }
 
-  // private updateErrorMessage(error: NgError): void {
-  //   // if (error) {
-  //   //   const controlName = this.control.label || this.control.placeholder || this.control.formControlName;
-  //   //   const requiredValue = this.getRequiredValue(error);
-  //   //   this.control.errorMessage = this.formatString(error.message, controlName, requiredValue);
-  //   // } else {
-  //   //   this.control.errorMessage = '';
-  //   // }
-  // }
-
   private subscribeControlEvents(): void {
-
-    // this.subscription = this.control.focusChanges
-    //   .subscribe((hasFocus: boolean) => {
-    //     this.hasFocus = hasFocus;
-    //     hasFocus ? this.markControlAsUntouched() : this.updateErrorStatus();
-    //   });
 
     this.subscription = this.ngControl.valueChanges.pipe(
       distinctUntilChanged()
