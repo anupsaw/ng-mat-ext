@@ -45,11 +45,11 @@ export class NgErrorDirective implements AfterViewInit, OnDestroy {
     let selector = '';
     console.log('show', this.name, this.ngControl.name);
     if (this.name) {
-      selector += `ng-error[for="${this.name}"]`;
+      selector += `ng-error[for="${this.name}"], mat-error-ext[for="${this.name}"]`;
     }
     if (this.ngControl.name) {
       selector += selector ? ',' : '';
-      selector += `ng-error[for="${this.ngControl.name}"]`;
+      selector += `ng-error[for="${this.ngControl.name}"], mat-error-ext[for="${this.ngControl.name}"]`;
     }
     if (!selector) {
 

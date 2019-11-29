@@ -83,13 +83,13 @@
            name='Isolated'
            required
            placeholder="Ng Isolated FormControl"
-           ngError
+           matErrorExt
            minlength="5" />
 
 
-    <ng-error type="required"
+    <mat-error-ext type="required"
               for="Isolated"
-              message="ngModel Control is required"></ng-error>
+              message="ngModel Control is required"></mat-error-ext>
 </form>
 
 <app-code-block [code]='code'>
