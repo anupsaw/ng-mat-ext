@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ContainerComponent } from './container/container.component';
 import { BackdropComponent } from './backdrop/backdrop.component';
 import { ExtensionsComponent } from './extensions/extensions.component';
+import { MagicalFieldErrorModule } from './demo/magical-field-error/magical-field-error.module';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { ExtensionsComponent } from './extensions/extensions.component';
     DemoModule,
     NgErrorModule,
     ReactiveFormsModule,
+    MagicalFieldErrorModule,
     AppRoutingModule
   ],
   providers: [],

@@ -1,6 +1,6 @@
 import {
   Directive, AfterViewInit, OnDestroy, ComponentRef, ViewContainerRef,
-  Inject, ComponentFactoryResolver, ChangeDetectorRef
+  Inject, ComponentFactoryResolver, ChangeDetectorRef, Input
 } from '@angular/core';
 import { NgErrorComponent } from './ng-error.component';
 import { Subscription } from 'rxjs';
@@ -15,6 +15,10 @@ import { distinctUntilChanged } from 'rxjs/operators';
 })
 export class NgErrorDirective implements AfterViewInit, OnDestroy {
 
+  private name: string;
+  @Input() set ngError(name: string) {
+    this.name = name;
+  }
 
   private errorCompRef: ComponentRef<NgErrorComponent>;
   private subscription: Subscription;
@@ -34,6 +38,24 @@ export class NgErrorDirective implements AfterViewInit, OnDestroy {
   }
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public getSelector(): string {
+
+    let selector = '';
+    console.log('show', this.name, this.ngControl.name);
+    if (this.name) {
+      selector += `ng-error[for="${this.name}"]`;
+    }
+    if (this.ngControl.name) {
+      selector += selector ? ',' : '';
+      selector += `ng-error[for="${this.ngControl.name}"]`;
+    }
+    if (!selector) {
+
+      throw new Error('Please provider ng-error for attribute for control');
+    }
+    return selector;
   }
 
   public createErrorComponent(comp: NgErrorComponent) {
@@ -56,10 +78,11 @@ export class NgErrorDirective implements AfterViewInit, OnDestroy {
 
   public includeNgErrorTemplate(): void {
 
-    const errorComp = document.querySelectorAll(`ng-error[for="${this.ngControl.name}"]`);
+    const errorComp = document.querySelectorAll(this.getSelector());
     let firstComp = null;
     errorComp.forEach((item: HTMLElement, index: number) => {
       const comp = NgErrorComponent.errorContainerRef.get(item.id);
+      console.log(comp.for);
       this.customErrors.push(NgError.create(comp.type, comp.message, comp.priority || 1));
       index === 0 ?
         firstComp = comp

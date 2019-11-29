@@ -59,14 +59,37 @@
     <input type='text'
            [formControl]='isolatedFormControl'
            name='Isolated'
+           required
            placeholder="Isolated FormControl"
-           ngError
+           ngError='isolatedControl'
            minlength="5" />
+
+    <div>
+        <ng-error type="required"
+                  for="isolatedControl"
+                  message="Isolated Control is required"></ng-error>
+    </div>
+
 
 
     <button type="button"
             class="sz-button"
             (click)="lastNameErrorShow()">Click</button>
+</form>
+
+<form #appForm="ngForm">
+    <input type='text'
+           [(ngModel)]='ngModelControl'
+           name='Isolated'
+           required
+           placeholder="Ng Isolated FormControl"
+           ngError
+           minlength="5" />
+
+
+    <ng-error type="required"
+              for="Isolated"
+              message="ngModel Control is required"></ng-error>
 </form>
 
 <app-code-block [code]='code'>
