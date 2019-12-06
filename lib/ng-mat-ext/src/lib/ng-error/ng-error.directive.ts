@@ -15,10 +15,8 @@ import { distinctUntilChanged } from 'rxjs/operators';
 })
 export class NgErrorDirective implements AfterViewInit, OnDestroy {
 
-  private name: string;
-  @Input() set ngError(name: string) {
-    this.name = name;
-  }
+  @Input() public name: string;
+  @Input() public ngError: string;
 
   private errorCompRef: ComponentRef<NgErrorComponent>;
   private subscription: Subscription;
@@ -43,16 +41,23 @@ export class NgErrorDirective implements AfterViewInit, OnDestroy {
   public getSelector(): string {
 
     let selector = '';
-    console.log('show', this.name, this.ngControl.name);
+
+    const setSelector = (name: string) => `ng-error[for="${name}"], mat-error-ext[for="${name}"]`;
     if (this.name) {
-      selector += `ng-error[for="${this.name}"], mat-error-ext[for="${this.name}"]`;
+      selector += setSelector(this.name);
     }
     if (this.ngControl.name) {
       selector += selector ? ',' : '';
-      selector += `ng-error[for="${this.ngControl.name}"], mat-error-ext[for="${this.ngControl.name}"]`;
+      selector += setSelector(this.ngControl.name);
     }
-    if (!selector) {
 
+    if (this.ngError) {
+      selector += selector ? ',' : '';
+      selector += setSelector(this.ngError);
+
+    }
+    console.log(selector);
+    if (!selector) {
       throw new Error('Please provider ng-error for attribute for control');
     }
     return selector;

@@ -58,16 +58,17 @@
 
     <input type='text'
            [formControl]='isolatedFormControl'
-           name='Isolated'
+           name='Isolated-control'
            required
            placeholder="Isolated FormControl"
-           ngError='isolatedControl'
+           ngError
            minlength="5" />
 
     <div>
         <ng-error type="required"
-                  for="isolatedControl"
-                  message="Isolated Control is required"></ng-error>
+                  for="Isolated-control"
+                  message="Isolated Control is required">
+        </ng-error>
     </div>
 
 
@@ -88,9 +89,25 @@
 
 
     <mat-error-ext type="required"
-              for="Isolated"
-              message="ngModel Control is required"></mat-error-ext>
+                   for="Isolated"
+                   message="ngModel Control is required"></mat-error-ext>
 </form>
+
+<!-- <form #appForm="ngForm">
+    <input type='text'
+           [(ngModel)]='name'
+           name='input-name'
+           required
+           placeholder="Ng Isolated FormControl"
+           ngError='input-name'
+           minlength="5" />
+
+
+    <ng-error type="required"
+              for="input-name"
+              message="Name is required">
+    </ng-error>
+</form> -->
 
 <app-code-block [code]='code'>
 
